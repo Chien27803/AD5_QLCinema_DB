@@ -1,6 +1,8 @@
 package com.example.ad5;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private int user_id;
     private String username;
     private String email;

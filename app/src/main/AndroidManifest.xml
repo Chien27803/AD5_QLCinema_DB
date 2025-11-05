@@ -18,6 +18,8 @@
         <!-- 📝 Màn hình đăng ký -->
         <activity android:name=".RegisterActivity" />
 
+        <activity android:name=".ProfileActivity" />
+
         <!-- 🏠 Màn hình chính (Launcher) -->
         <activity
             android:name=".MainActivity"

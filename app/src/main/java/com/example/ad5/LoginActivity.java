@@ -13,7 +13,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText etUser, etPass;
     Button btnLogin, btnRegister;
-    DBHelper dbHelper; // 🔹 thêm dòng này để dùng database
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +49,9 @@ public class LoginActivity extends AppCompatActivity {
                             "Đăng nhập thành công! Xin chào " + user.getUsername(),
                             Toast.LENGTH_SHORT).show();
 
-                    // Chuyển sang MainActivity
+                    // Chuyển sang MainActivity và truyền user
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("user", user); // Truyền đối tượng user
                     startActivity(intent);
                     finish();
                 } else {
@@ -64,8 +65,10 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
+                // TODO: Tạo RegisterActivity
+                Toast.makeText(LoginActivity.this, "Chức năng đăng ký đang phát triển", Toast.LENGTH_SHORT).show();
+                // Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                // startActivity(intent);
             }
         });
     }
