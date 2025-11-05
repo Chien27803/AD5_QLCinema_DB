@@ -53,6 +53,13 @@
                 tools:text="Thời lượng: 91 phút"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvMovieStatus"
+                android:textSize="14sp"
+                android:textColor="#999999"
+                tools:text="Trạng thái: Đang chiếu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
@@ -65,7 +72,8 @@
             <ImageView
                 android:id="@+id/btnEditMovie"
                 android:src="@android:drawable/ic_menu_edit"
-                android:tint="#3498DB" android:contentDescription="Sửa Phim"
+                android:tint="#3498DB"
+                android:contentDescription="Sửa Phim"
                 android:padding="8dp"
                 android:clickable="true"
                 android:focusable="true"

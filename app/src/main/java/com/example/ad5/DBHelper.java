@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "cinema_db.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 5;
     // Đảm bảo bạn có các hằng số này:
     private static final String TABLE_MOVIE = "Movie";
     private static final String KEY_MOVIE_ID = "movie_id";
