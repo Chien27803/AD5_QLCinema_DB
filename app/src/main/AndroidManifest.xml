@@ -20,6 +20,8 @@
 
         <activity android:name=".ProfileActivity" />
 
+        <activity android:name=".MovieDetailActivity" />
+
         <!-- 🏠 Màn hình chính (Launcher) -->
         <activity
             android:name=".MainActivity"

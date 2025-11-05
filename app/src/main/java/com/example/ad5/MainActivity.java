@@ -162,22 +162,20 @@ public class MainActivity extends AppCompatActivity {
 
         nowShowingAdapter = new MovieAdapter(this, nowShowingMovies, movie -> {
             // Click vào phim -> Xem chi tiết
-            Toast.makeText(this, "Xem: " + movie.getMovie_name(), Toast.LENGTH_SHORT).show();
-            // TODO: Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
-            // intent.putExtra("movie", movie);
-            // intent.putExtra("user", currentUser);
-            // startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
+            intent.putExtra("movie", movie);
+            intent.putExtra("user", currentUser);
+            startActivity(intent);
         });
         rvNowShowing.setAdapter(nowShowingAdapter);
 
         // Lấy danh sách phim sắp chiếu
         List<Movie> comingSoonMovies = dbHelper.getMoviesByStatus("Sắp chiếu");
         comingSoonAdapter = new MovieAdapter(this, comingSoonMovies, movie -> {
-            Toast.makeText(this, "Xem: " + movie.getMovie_name(), Toast.LENGTH_SHORT).show();
-            // TODO: Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
-            // intent.putExtra("movie", movie);
-            // intent.putExtra("user", currentUser);
-            // startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
+            intent.putExtra("movie", movie);
+            intent.putExtra("user", currentUser);
+            startActivity(intent);
         });
         rvComingSoon.setAdapter(comingSoonAdapter);
     }

@@ -291,8 +291,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    app:tint="#E50914" />
+                    android:src="@drawable/img"
+                    />
 
                 <View
                     android:layout_width="match_parent"
