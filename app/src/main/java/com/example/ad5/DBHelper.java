@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "cinema_db.db";
     private static final int DB_VERSION = 1;
@@ -56,6 +59,20 @@ public class DBHelper extends SQLiteOpenHelper {
                 "release_date TEXT, " +
                 "point REAL DEFAULT 0, " +
                 "status TEXT DEFAULT 'Đang chiếu')");
+
+        // ===== Thêm 10 bộ phim hot gần đây =====
+        db.execSQL("INSERT INTO Movie (movie_name, movie_type, description, image, language, release_date, point, status) VALUES " +
+                "('Inside Out 2', 'Hoạt hình, Gia đình', 'Tiếp nối hành trình cảm xúc của cô bé Riley với nhiều cảm xúc mới.', '', 'English', '2024-06-14', 8.8, 'Đang chiếu')," +
+                "('Deadpool & Wolverine', 'Hành động, Hài hước', 'Hai dị nhân Deadpool và Wolverine cùng hợp tác trong một nhiệm vụ bất ngờ.', 'deadpool_wolverine.jpg', 'English', '2024-07-26', 8.5, 'Đang chiếu')," +
+                "('Dune: Part Two', 'Khoa học viễn tưởng, Phiêu lưu', 'Paul Atreides hợp tác với người Fremen để báo thù cho gia đình.', 'dune2.jpg', 'English', '2024-03-01', 8.6, 'Đang chiếu')," +
+                "('Kingdom of the Planet of the Apes', 'Hành động, Khoa học viễn tưởng', 'Câu chuyện sau hàng thế kỷ loài người suy tàn, khỉ thống trị.', 'planet_apes.jpg', 'English', '2024-05-10', 7.9, 'Đang chiếu')," +
+                "('Venom: The Last Dance', 'Hành động, Viễn tưởng', 'Phần cuối của Venom với trận chiến sinh tử.', 'venom_last_dance.jpg', 'English', '2024-10-25', 7.8, 'Sắp chiếu')," +
+                "('The Marvels', 'Siêu anh hùng, Hành động', 'Captain Marvel cùng các đồng đội chiến đấu chống lại kẻ thù vũ trụ mới.', 'the_marvels.jpg', 'English', '2023-11-10', 6.2, 'Đang chiếu')," +
+                "('Kung Fu Panda 4', 'Hoạt hình, Hài hước', 'Po trở lại với hành trình tìm kiếm người kế thừa và đối đầu kẻ thù mới.', 'kung_fu_panda_4.jpg', 'English', '2024-03-08', 7.5, 'Đang chiếu')," +
+                "('Godzilla x Kong: The New Empire', 'Hành động, Quái vật', 'Hai quái thú huyền thoại hợp lực trước mối đe dọa từ sâu trong lòng Trái Đất.', 'godzilla_kong.jpg', 'English', '2024-04-12', 7.4, 'Đang chiếu')," +
+                "('Joker: Folie à Deux', 'Tâm lý, Kịch tính', 'Phần hai của Joker với sự xuất hiện của Harley Quinn.', 'joker2.jpg', 'English', '2024-10-04', 8.7, 'Sắp chiếu')," +
+                "('Moana 2', 'Hoạt hình, Phiêu lưu', 'Moana lên đường cho hành trình mới vượt đại dương xa hơn bao giờ hết.', 'moana2.jpg', 'English', '2024-11-27', 8.3, 'Sắp chiếu')");
+
 
         // ===== BẢNG SUẤT CHIẾU =====
         db.execSQL("CREATE TABLE Showtime (" +
@@ -186,7 +203,50 @@ public class DBHelper extends SQLiteOpenHelper {
         if (c != null) c.close();
         return null;
     }
-    // 🧩 Thêm phim mới
+    // 🧩 Lấy toàn bộ danh sách người dùng
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM Users ORDER BY user_id DESC", null);
+
+        if (c != null && c.moveToFirst()) {
+            do {
+                User u = new User();
+                u.setUser_id(c.getInt(c.getColumnIndexOrThrow("user_id")));
+                u.setUsername(c.getString(c.getColumnIndexOrThrow("username")));
+                u.setEmail(c.getString(c.getColumnIndexOrThrow("email")));
+                u.setPhone(c.getString(c.getColumnIndexOrThrow("phone")));
+                u.setAddress(c.getString(c.getColumnIndexOrThrow("address")));
+                u.setPassword(c.getString(c.getColumnIndexOrThrow("password")));
+                u.setRole(c.getString(c.getColumnIndexOrThrow("role")));
+                u.setStatus(c.getInt(c.getColumnIndexOrThrow("status")));
+
+                userList.add(u);
+            } while (c.moveToNext());
+            c.close();
+        }
+
+        return userList;
+    }
+    // 🧩 Xóa user theo ID
+    public void deleteUser(int userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("Users", "user_id=?", new String[]{String.valueOf(userId)});
+        db.close();
+    }
+
+    // 🧩 Cập nhật role cho user
+    public void updateUserRole(int userId, String newRole) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("role", newRole);
+        db.update("Users", values, "user_id=?", new String[]{String.valueOf(userId)});
+        db.close();
+    }
+
+
+
 
 
 

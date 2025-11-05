@@ -13,7 +13,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText etUser, etPass;
     Button btnLogin, btnRegister;
-    DBHelper dbHelper; // 🔹 thêm dòng này để dùng database
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +49,20 @@ public class LoginActivity extends AppCompatActivity {
                             "Đăng nhập thành công! Xin chào " + user.getUsername(),
                             Toast.LENGTH_SHORT).show();
 
-                    // Chuyển sang MainActivity
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    // 🧩 Kiểm tra vai trò người dùng
+                    if (user.getRole() != null && user.getRole().equalsIgnoreCase("admin")) {
+                        // Nếu là admin → sang AdminActivity
+                        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                        intent.putExtra("username", user.getUsername());
+                        startActivity(intent);
+                    } else {
+                        // Nếu là user → sang MainActivity
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("username", user.getUsername());
+                        startActivity(intent);
+                    }
+
+                    finish(); // đóng LoginActivity
                 } else {
                     Toast.makeText(LoginActivity.this,
                             "Sai email hoặc mật khẩu!", Toast.LENGTH_SHORT).show();

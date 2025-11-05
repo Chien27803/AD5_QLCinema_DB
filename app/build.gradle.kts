@@ -1,11 +1,15 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
 }
 
 android {
     namespace = "com.example.ad5"
-    compileSdk {
-        version = release(36)
+    compileSdk = 36
+
+    buildFeatures {
+        buildConfig = true   // ← Bật tạo BuildConfig.java
     }
 
     defaultConfig {
@@ -16,6 +20,21 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val properties = Properties()
+        val localPropsFile = rootProject.file("local.properties")
+        if (localPropsFile.exists()) {
+            properties.load(localPropsFile.inputStream())
+        } else {
+            throw GradleException("local.properties not found!")
+        }
+
+
+        buildConfigField("String", "CLOUD_NAME", "\"${properties.getProperty("CLOUD_NAME")}\"")
+        buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY")}\"")
+        buildConfigField("String", "API_SECRET", "\"${properties.getProperty("API_SECRET")}\"")
+
+
     }
 
     buildTypes {
@@ -27,6 +46,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -41,4 +61,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation("com.cloudinary:cloudinary-android-core:1.29.0")
+
 }

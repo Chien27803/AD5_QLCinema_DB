@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#F8F9FA"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 🔹 Thanh tiêu đề + thông tin admin -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="24dp">
+
+        <!-- Tiêu đề bên trái -->
+        <TextView
+            android:text="Quản lý AD5"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <!-- Thông tin admin góc phải -->
+        <TextView
+            android:id="@+id/tvAdminInfo"
+            android:text=" Admin "
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- 🔹 Nút quản lý phim -->
+    <Button
+        android:id="@+id/btnManageMovies"
+        android:text="🎞️ Quản lý phim"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- 🔹 Nút quản lý phòng chiếu -->
+    <Button
+        android:id="@+id/btnManageRooms"
+        android:text="🏠 Quản lý phòng chiếu"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- 🔹 Nút quản lý người dùng -->
+    <Button
+        android:id="@+id/btnManageUsers"
+        android:text="👤 Quản lý người dùng"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- 🔹 Nút xem thống kê -->
+    <Button
+        android:id="@+id/btnStatistics"
+        android:text="📊 Xem thống kê"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- 🔹 Nút đăng xuất (ẩn mặc định) -->
+    <Button
+        android:id="@+id/btnLogout"
+        android:text="🚪 Đăng xuất"
+        android:backgroundTint="#E74C3C"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
