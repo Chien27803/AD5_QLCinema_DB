@@ -40,8 +40,16 @@ public class AdminActivity extends AppCompatActivity {
         tvAdminInfo.setOnClickListener(this::showAdminMenu);
 
         // ⚙️ Các nút chức năng
-        btnManageMovies.setOnClickListener(v ->
-                Toast.makeText(this, "🎞️ Mở trang quản lý phim", Toast.LENGTH_SHORT).show()
+        btnManageMovies.setOnClickListener(v -> {
+            // Thay Toast bằng lệnh khởi động Activity
+            Intent movieIntent = new Intent(AdminActivity.this, MovieManagementActivity.class);
+            startActivity(movieIntent);
+            // (Optional) Toast.makeText(this, "🎞️ Mở trang quản lý phim", Toast.LENGTH_SHORT).show();
+        });
+        // *************************************************
+
+        btnManageRooms.setOnClickListener(v ->
+                Toast.makeText(this, "🏠 Mở trang quản lý phòng chiếu", Toast.LENGTH_SHORT).show()
         );
 
         btnManageRooms.setOnClickListener(v ->

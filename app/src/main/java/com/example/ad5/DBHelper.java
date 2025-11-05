@@ -14,6 +14,10 @@ import java.util.List;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "cinema_db.db";
     private static final int DB_VERSION = 1;
+    // Đảm bảo bạn có các hằng số này:
+    private static final String TABLE_MOVIE = "Movie";
+    private static final String KEY_MOVIE_ID = "movie_id";
+    public static final String STATUS_DA_HUY = "Đã hủy"; // Hằn
 
     public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -49,29 +53,25 @@ public class DBHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(room_id) REFERENCES Room(room_id))");
 
         // ===== BẢNG PHIM =====
+        // Sửa định nghĩa bảng Movie trong phương thức onCreate() của DBHelper
         db.execSQL("CREATE TABLE Movie (" +
                 "movie_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "movie_name TEXT NOT NULL, " +
                 "movie_type TEXT, " +
                 "description TEXT, " +
                 "image TEXT, " +
+                "duration INTEGER, " +
                 "language TEXT, " +
                 "release_date TEXT, " +
                 "point REAL DEFAULT 0, " +
-                "status TEXT DEFAULT 'Đang chiếu')");
+                "status TEXT DEFAULT 'Sắp chiếu')"); // Đổi mặc định thành 'Sắp chiếu'
 
         // ===== Thêm 10 bộ phim hot gần đây =====
-        db.execSQL("INSERT INTO Movie (movie_name, movie_type, description, image, language, release_date, point, status) VALUES " +
-                "('Inside Out 2', 'Hoạt hình, Gia đình', 'Tiếp nối hành trình cảm xúc của cô bé Riley với nhiều cảm xúc mới.', '', 'English', '2024-06-14', 8.8, 'Đang chiếu')," +
-                "('Deadpool & Wolverine', 'Hành động, Hài hước', 'Hai dị nhân Deadpool và Wolverine cùng hợp tác trong một nhiệm vụ bất ngờ.', 'deadpool_wolverine.jpg', 'English', '2024-07-26', 8.5, 'Đang chiếu')," +
-                "('Dune: Part Two', 'Khoa học viễn tưởng, Phiêu lưu', 'Paul Atreides hợp tác với người Fremen để báo thù cho gia đình.', 'dune2.jpg', 'English', '2024-03-01', 8.6, 'Đang chiếu')," +
-                "('Kingdom of the Planet of the Apes', 'Hành động, Khoa học viễn tưởng', 'Câu chuyện sau hàng thế kỷ loài người suy tàn, khỉ thống trị.', 'planet_apes.jpg', 'English', '2024-05-10', 7.9, 'Đang chiếu')," +
-                "('Venom: The Last Dance', 'Hành động, Viễn tưởng', 'Phần cuối của Venom với trận chiến sinh tử.', 'venom_last_dance.jpg', 'English', '2024-10-25', 7.8, 'Sắp chiếu')," +
-                "('The Marvels', 'Siêu anh hùng, Hành động', 'Captain Marvel cùng các đồng đội chiến đấu chống lại kẻ thù vũ trụ mới.', 'the_marvels.jpg', 'English', '2023-11-10', 6.2, 'Đang chiếu')," +
-                "('Kung Fu Panda 4', 'Hoạt hình, Hài hước', 'Po trở lại với hành trình tìm kiếm người kế thừa và đối đầu kẻ thù mới.', 'kung_fu_panda_4.jpg', 'English', '2024-03-08', 7.5, 'Đang chiếu')," +
-                "('Godzilla x Kong: The New Empire', 'Hành động, Quái vật', 'Hai quái thú huyền thoại hợp lực trước mối đe dọa từ sâu trong lòng Trái Đất.', 'godzilla_kong.jpg', 'English', '2024-04-12', 7.4, 'Đang chiếu')," +
-                "('Joker: Folie à Deux', 'Tâm lý, Kịch tính', 'Phần hai của Joker với sự xuất hiện của Harley Quinn.', 'joker2.jpg', 'English', '2024-10-04', 8.7, 'Sắp chiếu')," +
-                "('Moana 2', 'Hoạt hình, Phiêu lưu', 'Moana lên đường cho hành trình mới vượt đại dương xa hơn bao giờ hết.', 'moana2.jpg', 'English', '2024-11-27', 8.3, 'Sắp chiếu')");
+        db.execSQL("INSERT INTO Movie (movie_name, movie_type, description, image, duration,language, release_date, point, status) VALUES " +
+                "('Inside Out 2', 'Hoạt hình, Gia đình', 'Tiếp nối hành trình cảm xúc của cô bé Riley với nhiều cảm xúc mới.', 'https://res.cloudinary.com/dq4guha5o/image/upload/v1762340504/inside2_a5etr8.png', 90,'English', '2024-06-14', 8.8, 'Đang chiếu')," +
+                "('Deadpool & Wolverine', 'Hành động, Hài hước', 'Hai dị nhân Deadpool và Wolverine cùng hợp tác trong một nhiệm vụ bất ngờ.', 'https://res.cloudinary.com/dq4guha5o/image/upload/v1762340762/phim2_vqlfjn.webp',80, 'English', '2024-07-26', 8.5, 'Sắp chiếu')," +
+                "('Dune: Part Two', 'Khoa học viễn tưởng, Phiêu lưu', 'Paul Atreides hợp tác với người Fremen để báo thù cho gia đình.', 'https://res.cloudinary.com/dq4guha5o/image/upload/v1762340826/phim3_wzhyhf.webp', 100,'English', '2024-03-01', 8.6, 'Đã hủy')");
+
 
 
         // ===== BẢNG SUẤT CHIẾU =====
@@ -243,6 +243,82 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("role", newRole);
         db.update("Users", values, "user_id=?", new String[]{String.valueOf(userId)});
         db.close();
+    }
+    // 🧩 Lấy toàn bộ danh sách phim
+    public List<Movie> getAllMovies() {
+        List<Movie> movieList = new ArrayList<>();
+
+        // 1. Khai báo hằng số tên bảng và tên cột (Nên được định nghĩa ở đầu lớp DBHelper)
+        final String TABLE_MOVIE = "Movie"; // Tên bảng
+        final String KEY_MOVIE_ID = "movie_id"; // Hằng số cho cột movie_id
+        final String KEY_MOVIE_NAME = "movie_name";
+        final String KEY_MOVIE_TYPE = "movie_type";
+        final String KEY_DESCRIPTION = "description";
+        final String KEY_IMAGE = "image";
+        final String KEY_DURATION = "duration"; // Cột mới đã được thêm
+        final String KEY_LANGUAGE = "language";
+        final String KEY_RELEASE_DATE = "release_date";
+        final String KEY_POINT = "point";
+        final String KEY_STATUS = "status";
+
+        // Sửa lỗi cú pháp: Dùng hằng số tên bảng và tên cột
+        String selectQuery = "SELECT * FROM " + TABLE_MOVIE + " ORDER BY " + KEY_MOVIE_ID + " DESC";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // Lặp qua tất cả các hàng và thêm vào danh sách
+        if (cursor.moveToFirst()) {
+            do {
+                // Đảm bảo bạn đang sử dụng lớp Movie đã được sửa đổi
+                Movie movie = new Movie();
+
+                // Ánh xạ dữ liệu từ Cursor vào đối tượng Movie
+                movie.setMovie_id(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_MOVIE_ID)));
+                movie.setMovie_name(cursor.getString(cursor.getColumnIndexOrThrow(KEY_MOVIE_NAME)));
+                movie.setMovie_type(cursor.getString(cursor.getColumnIndexOrThrow(KEY_MOVIE_TYPE)));
+                movie.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(KEY_DESCRIPTION)));
+                movie.setImage(cursor.getString(cursor.getColumnIndexOrThrow(KEY_IMAGE)));
+
+                // Lấy cột DURATION đã thêm
+                movie.setDuration(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_DURATION)));
+
+                movie.setLanguage(cursor.getString(cursor.getColumnIndexOrThrow(KEY_LANGUAGE)));
+                movie.setRelease_date(cursor.getString(cursor.getColumnIndexOrThrow(KEY_RELEASE_DATE)));
+                movie.setPoint(cursor.getDouble(cursor.getColumnIndexOrThrow(KEY_POINT)));
+                movie.setStatus(cursor.getString(cursor.getColumnIndexOrThrow(KEY_STATUS)));
+
+                movieList.add(movie);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return movieList;
+    }
+    public int markMovieAsCanceled(int movieId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        // Chỉ cập nhật cột 'status'
+        values.put("status", STATUS_DA_HUY);
+
+        int rowsAffected = 0;
+        try {
+            // Thực hiện lệnh UPDATE: UPDATE Movie SET status = 'Đã hủy' WHERE movie_id = movieId
+            rowsAffected = db.update(
+                    TABLE_MOVIE,
+                    values,
+                    KEY_MOVIE_ID + " = ?",
+                    new String[]{String.valueOf(movieId)}
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+
+        return rowsAffected;
     }
 
 
