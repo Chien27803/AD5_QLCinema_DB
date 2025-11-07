@@ -36,7 +36,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "address TEXT, " +
                 "role TEXT DEFAULT 'user', " + // vì SQLite không có ENUM
                 "created_at TEXT DEFAULT CURRENT_TIMESTAMP, " +
-                "status INTEGER DEFAULT 1)");
+                "status INTEGER DEFAULT)");
 
         // ===== BẢNG PHÒNG CHIẾU =====
         db.execSQL("CREATE TABLE Room (" +

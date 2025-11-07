@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +30,18 @@ public class MovieManagementActivity extends AppCompatActivity implements MovieA
         super.onCreate(savedInstanceState);
         // Ánh xạ layout XML bạn vừa cung cấp
         setContentView(R.layout.activity_manage_movies);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        // Bật nút back (mũi tên ←)
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        // Xử lý khi nhấn nút back
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
         // Khởi tạo DBHelper
         dbHelper = new DBHelper(this);
 
