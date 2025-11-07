@@ -11,9 +11,10 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "cinema_db.db";
-    private static final int DB_VERSION = 5;
+    private static final int DB_VERSION = 6;
     // Đảm bảo bạn có các hằng số này:
     private static final String TABLE_MOVIE = "Movie";
     private static final String KEY_MOVIE_ID = "movie_id";
@@ -36,7 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "address TEXT, " +
                 "role TEXT DEFAULT 'user', " + // vì SQLite không có ENUM
                 "created_at TEXT DEFAULT CURRENT_TIMESTAMP, " +
-                "status INTEGER DEFAULT)");
+                "status INTEGER DEFAULT 1)");
 
         // ===== BẢNG PHÒNG CHIẾU =====
         db.execSQL("CREATE TABLE Room (" +
@@ -229,10 +230,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return userList;
     }
-    // 🧩 Xóa user theo ID
+    // 🧩 Cập nhật trạng thái user thành "đã hủy" thay vì xóa hẳn
     public void deleteUser(int userId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("Users", "user_id=?", new String[]{String.valueOf(userId)});
+        ContentValues values = new ContentValues();
+        values.put("status", 0); // 0 = Đã hủy, 1 = Đang hoạt động
+
+        db.update("Users", values, "user_id=?", new String[]{String.valueOf(userId)});
         db.close();
     }
 

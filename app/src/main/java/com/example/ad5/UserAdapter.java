@@ -42,7 +42,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.tvName.setText(u.getUsername());
         holder.tvEmail.setText(u.getEmail());
         holder.tvRole.setText("Role: " + u.getRole());
-        holder.tvStatus.setText(u.getStatus() == 1 ? "Đang hoạt động" : "Khóa");
+        holder.tvStatus.setText(u.getStatus() == 1 ? "Đang hoạt động" : "Đã hủy");
 
         // Xử lý nút bấm
         holder.btnEdit.setOnClickListener(v -> listener.onEdit(u));
