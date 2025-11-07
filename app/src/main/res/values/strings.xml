@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Cinema Profile</string>
+    <string name="confirm_title">Xác nhận</string>
+    <string name="confirm_message">Bạn có chắc chắn muốn cập nhật thông tin?</string>
+    <string name="confirm_yes">Xác nhận</string>
+    <string name="confirm_no">Hủy</string>
+    <string name="update_success">Cập nhật thông tin thành công!</string>
+
+    <string name="error_phone_empty">Vui lòng nhập số điện thoại</string>
+    <string name="error_phone_invalid">Số điện thoại phải gồm đúng 10 chữ số</string>
+    <string name="error_name_empty">Vui lòng nhập họ và tên</string>
+    <string name="error_email_empty">Vui lòng nhập email</string>
+    <string name="error_birth_empty">Vui lòng chọn ngày sinh</string>
+    <string name="error_birth_future">Ngày sinh phải trước ngày hiện tại</string>
+    <string name="error_gender_empty">Vui lòng chọn giới tính</string>
+    <string name="error_address_empty">Vui lòng nhập địa chỉ</string>
+
+</resources>
