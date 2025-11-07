@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import java.util.List;
 
@@ -55,6 +57,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 listener.onMovieClick(movie);
             }
         });
+
+        Glide.with(context)
+                .load(movie.getImage()) // Lấy URL từ đối tượng Movie
+//                .placeholder(R.drawable.placeholder_image) // Tùy chọn: Ảnh hiển thị trong lúc đang tải
+//                .error(R.drawable.error_image) // Tùy chọn: Ảnh hiển thị nếu tải thất bại
+                .into(holder.imgMovie); // Đặt ảnh vào ImageView
     }
 
     @Override

@@ -99,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
         // Quick booking
         cardQuickBooking.setOnClickListener(v -> {
             Toast.makeText(this, "Đặt vé nhanh", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, AllMoviesActivity.class);
+            intent.putExtra("user", currentUser);
+            startActivity(intent);
         });
 
         // Promotions
