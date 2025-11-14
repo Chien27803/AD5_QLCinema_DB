@@ -2,7 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Quyền dùng Internet: bắt buộc để upload Cloudinary -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Quyền đọc ảnh trong máy (Android 13+ dùng READ_MEDIA_IMAGES) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+    <!-- Cho các máy Android cũ hơn (<= 12) nếu cần đọc file ảnh từ storage -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         tools:replace="android:fullBackupContent"
@@ -29,8 +36,12 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".UserListActivity" />
-
         <activity android:name=".MovieManagementActivity" />
+        <activity android:name=".RoomManagementActivity" />
+        <activity
+            android:name=".StatisticsActivity"
+            android:label="Thống kê doanh thu"
+            android:exported="false" />
 
     </application>
 

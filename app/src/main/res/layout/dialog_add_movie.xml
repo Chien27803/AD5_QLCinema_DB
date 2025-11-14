@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/bg_dialog_round">
+
+    <TextView
+        android:text="Thêm Phim"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- Tên phim -->
+    <TextView
+        android:text="Tên phim"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtAddMovieTitle"
+        android:hint="Nhập tên phim..."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Thể loại -->
+    <TextView
+        android:text="Thể loại"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtAddMovieType"
+        android:hint="Ví dụ: Hành động, Tình cảm..."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Thời lượng -->
+    <TextView
+        android:text="Thời lượng (phút)"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtAddMovieDuration"
+        android:hint="Nhập số phút"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Mô tả -->
+    <TextView
+        android:text="Mô tả"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtAddMovieDescription"
+        android:hint="Nhập mô tả phim..."
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Ảnh poster -->
+    <TextView
+        android:text="Ảnh poster"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/imgAddMoviePreview"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/inside2"
+        android:background="#DDDDDD"
+        android:padding="4dp" />
+
+    <Button
+        android:id="@+id/btnChooseImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Chọn ảnh..." />
+
+    <!-- Trạng thái -->
+    <TextView
+        android:text="Trạng thái"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtAddMovieStatus"
+        android:hint="Đang chiếu / Sắp chiếu..."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Nút Thêm -->
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnSaveAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thêm" />
+    </LinearLayout>
+
+</LinearLayout>

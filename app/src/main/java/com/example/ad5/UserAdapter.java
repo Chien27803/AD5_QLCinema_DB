@@ -41,6 +41,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         User u = list.get(position);
         holder.tvName.setText(u.getUsername());
         holder.tvEmail.setText(u.getEmail());
+        holder.tvAddress.setText(u.getAddress());
         holder.tvRole.setText("Role: " + u.getRole());
         holder.tvStatus.setText(u.getStatus() == 1 ? "Đang hoạt động" : "Đã hủy");
 
@@ -57,7 +58,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     // ViewHolder ánh xạ các thành phần trong layout item_user.xml
     public static class UserViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvEmail, tvRole, tvStatus;
+        TextView tvName, tvEmail, tvRole, tvStatus,tvAddress;
         Button btnEdit, btnDelete, btnRole;
 
         public UserViewHolder(@NonNull View itemView) {
@@ -69,6 +70,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             btnRole = itemView.findViewById(R.id.btnRole); // ⚡ Thêm dòng này
+            tvAddress =  itemView.findViewById(R.id.tvAddress);
         }
     }
 }

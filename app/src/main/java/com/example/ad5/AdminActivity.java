@@ -63,13 +63,12 @@ public class AdminActivity extends AppCompatActivity {
         });
         // *************************************************
 
-        btnManageRooms.setOnClickListener(v ->
-                Toast.makeText(this, "🏠 Mở trang quản lý phòng chiếu", Toast.LENGTH_SHORT).show()
-        );
 
-        btnManageRooms.setOnClickListener(v ->
-                Toast.makeText(this, "🏠 Mở trang quản lý phòng chiếu", Toast.LENGTH_SHORT).show()
-        );
+
+        btnManageRooms.setOnClickListener(v -> {
+            Intent roomIntent = new Intent(AdminActivity.this, RoomManagementActivity.class); // Đổi tên biến
+            startActivity(roomIntent);
+        });
 
         // ✅ Khi bấm “Quản lý người dùng” → chuyển sang trang UserListActivity
         btnManageUsers.setOnClickListener(v -> {
@@ -77,9 +76,11 @@ public class AdminActivity extends AppCompatActivity {
             startActivity(userIntent);
         });
 
-        btnStatistics.setOnClickListener(v ->
-                Toast.makeText(this, "📊 Mở trang thống kê", Toast.LENGTH_SHORT).show()
-        );
+        // ✅ Khi nhấn "Xem thống kê" → mở StatisticsActivity
+        btnStatistics.setOnClickListener(v -> {
+            Intent statisticsIntent = new Intent(AdminActivity.this, StatisticsActivity.class);
+            startActivity(statisticsIntent);
+        });
     }
 
     // 🔸 Hiển thị menu khi bấm vào tên admin

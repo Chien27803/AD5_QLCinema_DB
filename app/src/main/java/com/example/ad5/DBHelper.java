@@ -324,6 +324,117 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return rowsAffected;
     }
+    // 🧩 Cập nhật thông tin một bộ phim
+    public int updateMovie(Movie movie) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        // Gán các giá trị cần cập nhật
+        // Truyền thẳng tên cột
+        values.put("movie_name", movie.getMovie_name());
+        values.put("movie_type", movie.getMovie_type());
+        values.put("description", movie.getDescription());
+        values.put("image", movie.getImage());
+        values.put("duration", movie.getDuration());
+        values.put("language", movie.getLanguage());
+        values.put("release_date", movie.getRelease_date());
+        values.put("point", movie.getPoint());
+        values.put("status", movie.getStatus());
+
+        int rowsAffected = 0;
+        try {
+            // UPDATE Movie SET ... WHERE movie_id = ?
+            rowsAffected = db.update(
+                    TABLE_MOVIE,
+                    values,
+                    KEY_MOVIE_ID + " = ?",
+                    new String[]{String.valueOf(movie.getMovie_id())}
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+
+        return rowsAffected;
+    }
+    public long addMovie(String name, String type, int duration,
+                         String description, String status, String imageUrl) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("movie_name", name);
+        values.put("movie_type", type);
+        values.put("duration", duration);
+        values.put("description", description);
+        values.put("status", status);
+        values.put("image", imageUrl);
+
+        long id = -1;
+        try {
+            id = db.insert("Movie", null, values);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+        return id;
+    }
+    // 🧩 Lấy toàn bộ danh sách phòng chiếu
+    public List<Room> getAllRooms() {
+        List<Room> roomList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM Room ORDER BY room_id DESC", null);
+
+        if (c != null && c.moveToFirst()) {
+            do {
+                Room r = new Room();
+                r.setRoom_id(c.getInt(c.getColumnIndexOrThrow("room_id")));
+                r.setRoom_name(c.getString(c.getColumnIndexOrThrow("room_name")));
+                r.setQuantity_seat(c.getInt(c.getColumnIndexOrThrow("quantity_seat")));
+                roomList.add(r);
+            } while (c.moveToNext());
+            c.close();
+        }
+        db.close();
+        return roomList;
+    }
+    // 🧩 Thêm phòng chiếu mới
+    public boolean addRoom(String name, int quantity) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("room_name", name);
+        cv.put("quantity_seat", quantity);
+
+        long result = db.insert("Room", null, cv);
+        db.close();
+        return result != -1;
+    }
+
+    // 🧩 Cập nhật thông tin phòng chiếu
+    public boolean updateRoom(int roomId, String name, int quantity) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("room_name", name);
+        cv.put("quantity_seat", quantity);
+
+        int rows = db.update("Room", cv, "room_id=?", new String[]{String.valueOf(roomId)});
+        db.close();
+        return rows > 0;
+    }
+
+    // 🧩 Xóa phòng chiếu
+    public boolean deleteRoom(int roomId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete("Room", "room_id=?", new String[]{String.valueOf(roomId)});
+        db.close();
+        return rows > 0;
+    }
+
+
+
+
 
 
 

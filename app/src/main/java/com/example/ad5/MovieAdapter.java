@@ -50,6 +50,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         // Hiển thị DURATION
         holder.tvMovieDuration.setText("Thời lượng: " + currentMovie.getDuration() + " phút");
+        holder.tvDescription.setText("Mô tả: " + currentMovie.getDescription());
+
         holder.tvStatus.setText("Trạng thái: "+currentMovie.getStatus());
 
         // 2. Tải ảnh từ URL bằng Glide
@@ -109,7 +111,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     // Lớp ViewHolder (Ánh xạ các thành phần giao diện)
     public static class MovieViewHolder extends RecyclerView.ViewHolder {
-        TextView tvMovieTitle, tvMovieType, tvMovieDuration,tvStatus;
+        TextView tvMovieTitle, tvMovieType, tvMovieDuration,tvStatus,tvDescription;
         ImageView imgMovie, btnEditMovie, btnDeleteMovie;
 
         public MovieViewHolder(@NonNull View itemView) {
@@ -122,6 +124,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             imgMovie = itemView.findViewById(R.id.imgMovie);
             btnEditMovie = itemView.findViewById(R.id.btnEditMovie);
             btnDeleteMovie = itemView.findViewById(R.id.btnDeleteMovie);
+            tvDescription = itemView.findViewById(R.id.tvDescription);
+
         }
     }
 }

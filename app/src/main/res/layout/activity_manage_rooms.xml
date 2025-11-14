@@ -10,39 +10,35 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@android:color/white"
-        android:theme="@style/ThemeOverlay.AppCompat.Light"
-        app:navigationIcon="@drawable/outline_arrow_back_ios_24"
-        android:elevation="0dp"
-        android:layout_marginTop="20dp"/>
+        android:elevation="2dp"
+        app:navigationIcon="@drawable/outline_arrow_back_ios_24" />
+
     <TextView
-        android:id="@+id/tvMovieHeader"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DANH SÁCH CÁC PHIM CỦA AD5"
-        android:textSize="20sp"
+        android:text="🏠 Danh sách phòng chiếu"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:gravity="center"
-        android:padding="12dp" />
+        android:textColor="#000000"
+        android:layout_marginTop="16dp" />
 
-
-    <!-- Danh sách phim -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMovies"
-        android:layout_marginTop="12dp"
+        android:id="@+id/rvRooms"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:layout_marginTop="8dp" />
 
-    <!-- Nút thêm phim -->
     <Button
-        android:id="@+id/btnAddMovie"
-        android:text="➕ Thêm phim"
+        android:id="@+id/btnAddRoom"
+        android:text="➕ Thêm phòng chiếu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/purple_500"
         android:textColor="@android:color/white" />
+
 </LinearLayout>
+
