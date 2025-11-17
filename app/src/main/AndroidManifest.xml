@@ -28,6 +28,12 @@
         <activity
             android:name=".AllMoviesActivity"
             android:exported="false" />
+        <activity
+            android:name=".BookingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyTicketsActivity"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"

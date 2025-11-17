@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "cinema_db.db";
-    private static final int DB_VERSION = 6; // Tăng version để tạo lại DB với dữ liệu mới
+    private static final int DB_VERSION = 7; // Tăng version để tạo lại DB với dữ liệu mới
 
     public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -47,18 +47,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 "seat_name TEXT NOT NULL, " +
                 "status INTEGER DEFAULT 1, " +
                 "FOREIGN KEY(room_id) REFERENCES Room(room_id))");
-
-        // ===== BẢNG PHIM =====
-//        db.execSQL("CREATE TABLE Movie (" +
-//                "movie_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-//                "movie_name TEXT NOT NULL, " +
-//                "movie_type TEXT, " +
-//                "description TEXT, " +
-//                "image TEXT, " +
-//                "language TEXT, " +
-//                "release_date TEXT, " +
-//                "point REAL DEFAULT 0, " +
-//                "status TEXT DEFAULT 'Đang chiếu')");
 
         // ===== BẢNG SUẤT CHIẾU =====
         db.execSQL("CREATE TABLE Showtime (" +
@@ -164,13 +152,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Movie (movie_name, movie_type, description, image, language, release_date, point, status) VALUES " +
                 "('Spider-Man: No Way Home', 'Hành động, Phiêu lưu', " +
                 "'Peter Parker phải đối mặt với hậu quả khi danh tính Spider-Man bị tiết lộ.', " +
-                "'https://m.media-amazon.com/images/I/91g5aJC8V3L.jpg', " +
+                "'https://resizing.flixster.com/8PNiwC2bpe9OecfYZSOVkvYC5vk=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzL2U5NGM0Y2Q1LTAyYTItNGFjNC1hNWZhLWMzYjJjOTdjMTFhOS5qcGc=', " +
                 "'Tiếng Anh - Phụ đề Việt', '2024-02-10', 8.9, 'Đang chiếu')");
 
         db.execSQL("INSERT INTO Movie (movie_name, movie_type, description, image, language, release_date, point, status) VALUES " +
                 "('Mai', 'Tâm lý, Tình cảm', " +
                 "'Câu chuyện về hành trình tìm lại ký ức của một cô gái trẻ.', " +
-                "'https://cdn.galaxycine.vn/media/2024/1/29/mai-500_1706508032488.jpg', " +
+                "'https://upload.wikimedia.org/wikipedia/vi/3/36/Mai_2024_poster.jpg', " +
                 "'Tiếng Việt', '2024-02-20', 8.5, 'Đang chiếu')");
 
         db.execSQL("INSERT INTO Movie (movie_name, movie_type, description, image, language, release_date, point, status) VALUES " +
@@ -182,19 +170,19 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Movie (movie_name, movie_type, description, image, language, release_date, point, status) VALUES " +
                 "('Doraemon: Nobita và Vùng Đất Lý Tưởng', 'Hoạt hình, Gia đình', " +
                 "'Nobita và nhóm bạn khám phá một thế giới hoàn hảo trong trí tưởng tượng.', " +
-                "'https://cdn.galaxycine.vn/media/2023/5/26/doraemon-500_1685097050737.jpg', " +
+                "'https://cdn.galaxycine.vn/media/2023/5/15/doraemon-utopia-2_1684121814838.jpg', " +
                 "'Tiếng Việt lồng tiếng', '2024-05-20', 7.8, 'Sắp chiếu')");
 
         db.execSQL("INSERT INTO Movie (movie_name, movie_type, description, image, language, release_date, point, status) VALUES " +
                 "('Godzilla x Kong: The New Empire', 'Hành động, Phiêu lưu', " +
                 "'Hai gã khổng lồ huyền thoại đối đầu với mối đe dọa mới ẩn náu trong thế giới.', " +
-                "'https://m.media-amazon.com/images/I/81ue9l9fCaL._AC_UF894,1000_QL80_.jpg', " +
+                "'https://upload.wikimedia.org/wikipedia/vi/4/41/Godzilla_x_Kong%2C_%C4%91%E1%BA%BF_ch%E1%BA%BF_m%E1%BB%9Bi.jpg', " +
                 "'Tiếng Anh - Phụ đề Việt', '2024-06-01', 8.3, 'Sắp chiếu')");
 
         db.execSQL("INSERT INTO Movie (movie_name, movie_type, description, image, language, release_date, point, status) VALUES " +
                 "('Lật Mặt 7: Một Điều Ước', 'Hài, Tâm lý', " +
                 "'Câu chuyện cảm động về gia đình và những điều ước giản đơn nhưng đầy ý nghĩa.', " +
-                "'https://cdn.galaxycine.vn/media/2023/12/12/lat-mat-7-500_1702368516788.jpg', " +
+                "'https://www.cgv.vn/media/catalog/product/cache/1/image/c5f0a1eff4c394a251036189ccddaacd/l/a/lat-mat-7.jpg', " +
                 "'Tiếng Việt', '2024-07-15', 8.1, 'Sắp chiếu')");
 
         db.execSQL("INSERT INTO Movie (movie_name, movie_type, description, image, language, release_date, point, status) VALUES " +

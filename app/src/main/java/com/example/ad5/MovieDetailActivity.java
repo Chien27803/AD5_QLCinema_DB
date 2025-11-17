@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 public class MovieDetailActivity extends AppCompatActivity {
@@ -82,12 +84,10 @@ public class MovieDetailActivity extends AppCompatActivity {
         // Book ticket button
         btnBookTicket.setOnClickListener(v -> {
             if (currentUser != null && currentUser.getUser_id() > 0) {
-                // TODO: Chuyển đến BookingActivity
-                Toast.makeText(this, "Đặt vé cho: " + movie.getMovie_name(), Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(MovieDetailActivity.this, BookingActivity.class);
-                // intent.putExtra("movie", movie);
-                // intent.putExtra("user", currentUser);
-                // startActivity(intent);
+                Intent intent = new Intent(MovieDetailActivity.this, BookingActivity.class);
+                intent.putExtra("movie", movie);
+                intent.putExtra("user", currentUser);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, "Vui lòng đăng nhập để đặt vé", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MovieDetailActivity.this, LoginActivity.class);
@@ -126,12 +126,27 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         tvDescription.setText(movie.getDescription());
 
-        // TODO: Load images với Glide
-        // Glide.with(this).load(movie.getImage()).into(imgPoster);
-        // Glide.with(this).load(movie.getImage()).into(imgBackdrop);
+        // Load images với Glide
+        String imageUrl = movie.getImage();
 
-        // Tạm thời dùng placeholder
-        imgPoster.setImageResource(R.drawable.ic_movie_placeholder);
-        imgBackdrop.setImageResource(R.drawable.ic_movie_placeholder);
+        if (imageUrl != null && !imageUrl.isEmpty() && !imageUrl.equals("null")) {
+            // Load poster image
+            Glide.with(this)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.ic_movie_placeholder)
+                    .error(R.drawable.ic_movie_placeholder)
+                    .into(imgPoster);
+
+            // Load backdrop image (blur effect)
+            Glide.with(this)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.ic_movie_placeholder)
+                    .error(R.drawable.ic_movie_placeholder)
+                    .into(imgBackdrop);
+        } else {
+            // Dùng placeholder nếu không có URL
+            imgPoster.setImageResource(R.drawable.ic_movie_placeholder);
+            imgBackdrop.setImageResource(R.drawable.ic_movie_placeholder);
+        }
     }
 }
