@@ -71,4 +71,9 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+    // Retrofit (Thư viện mạng)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+// Retrofit Converter (Để chuyển đổi JSON sang Java Object)
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
 }

@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="24dp"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@android:color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:navigationIcon="@drawable/outline_arrow_back_ios_24"
+        android:elevation="0dp"
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:text="🎟️ Đăng Nhập"
@@ -27,17 +37,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
         android:text="Đăng nhập"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/blue"
+        app:cornerRadius="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegister"
         android:text="Đăng ký"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@color/blue"
+        app:cornerRadius="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
 </LinearLayout>

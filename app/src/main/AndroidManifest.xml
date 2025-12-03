@@ -43,6 +43,23 @@
             android:label="Thống kê doanh thu"
             android:exported="false" />
 
+<!--        <activity-->
+<!--            android:name=".AllMoviesActivity"-->
+<!--            android:exported="false" />-->
+        <activity
+            android:name=".BookingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyTicketsActivity"
+            android:exported="false" />
+        <activity android:name=".MovieDetailActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".TicketActivity" />
+        <activity android:name=".ShowtimeActivity" />
+        <activity android:name=".AllShowtimesActivity" />
+        <activity android:name=".SeatSelectionActivity" />
+
+
     </application>
 
 </manifest>

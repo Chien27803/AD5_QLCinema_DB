@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    tools:context=".SeatSelectionActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@android:color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_movie_title_seat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Inside Out 2 - Vui vẻ bên trong 2"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/tv_showtime_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            tools:text="Phòng VIP 3D | Ngày: 2025-11-21 | Giờ: 19:30"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="MÀN HÌNH"
+            android:background="#CCCCCC"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_seats"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="8dp"
+        android:scrollbars="vertical"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingVertical="8dp">
+
+        <View android:layout_width="16dp" android:layout_height="16dp" android:background="#EEEEEE"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Còn trống" android:textSize="12sp" android:layout_marginStart="4dp" android:layout_marginEnd="16dp"/>
+
+        <View android:layout_width="16dp" android:layout_height="16dp" android:background="#66BB6A"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Đã chọn" android:textSize="12sp" android:layout_marginStart="4dp" android:layout_marginEnd="16dp"/>
+
+        <View android:layout_width="16dp" android:layout_height="16dp" android:background="#E57373"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Đã đặt" android:textSize="12sp" android:layout_marginStart="4dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#F0F0F0"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_selected_seats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            tools:text="Ghế đã chọn (2): A1, A2"
+            android:layout_marginBottom="4dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng tiền: "
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_total_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                tools:text="240.000 VNĐ"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_continue_booking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tiếp tục đặt vé (Thanh toán)"
+            android:enabled="false"/>
+    </LinearLayout>
+</LinearLayout>

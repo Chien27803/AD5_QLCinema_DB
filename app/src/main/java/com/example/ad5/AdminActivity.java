@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AdminActivity extends AppCompatActivity {
 
     TextView tvAdminInfo;
-    Button btnManageMovies, btnManageRooms, btnManageUsers, btnStatistics, btnLogout;
+    Button btnManageMovies, btnManageRooms, btnManageUsers, btnStatistics, btnLogout,btnTicket,btnShowtime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,8 @@ public class AdminActivity extends AppCompatActivity {
         btnManageUsers = findViewById(R.id.btnManageUsers);
         btnStatistics = findViewById(R.id.btnStatistics);
         btnLogout = findViewById(R.id.btnLogout);
+        btnTicket = findViewById(R.id.btnOrder);
+        btnShowtime = findViewById(R.id.btnShowtime);
 
         // 🧩 Lấy thông tin admin (truyền từ LoginActivity)
         Intent intent = getIntent();
@@ -81,6 +83,22 @@ public class AdminActivity extends AppCompatActivity {
             Intent statisticsIntent = new Intent(AdminActivity.this, StatisticsActivity.class);
             startActivity(statisticsIntent);
         });
+        btnTicket.setOnClickListener(v -> {
+            Intent orderIntent = new Intent(AdminActivity.this, TicketActivity.class);
+            startActivity(orderIntent);
+        });
+        // Trong AdminActivity.java
+// ...
+        btnShowtime.setOnClickListener(v -> {
+            // 💡 SỬA LỖI: Truyền MOVIE_ID cố định (Ví dụ: ID phim đầu tiên = 1)
+            final int DEBUG_MOVIE_ID = 1;
+
+            Intent showtimeIntent = new Intent(AdminActivity.this, ShowtimeActivity.class);
+            showtimeIntent.putExtra("MOVIE_ID", DEBUG_MOVIE_ID); // <-- Bắt buộc phải có dòng này
+            startActivity(showtimeIntent);
+        });
+
+
     }
 
     // 🔸 Hiển thị menu khi bấm vào tên admin

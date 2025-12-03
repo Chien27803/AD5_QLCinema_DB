@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar; //
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,11 +15,28 @@ public class LoginActivity extends AppCompatActivity {
     EditText etUser, etPass;
     Button btnLogin, btnRegister;
     DBHelper dbHelper;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        // 🎯 1. Ánh xạ và Thiết lập Toolbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            // Hiển thị nút quay lại
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            // Ẩn tiêu đề mặc định
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
+        // 🎯 2. XỬ LÝ SỰ KIỆN NHẤN NÚT QUAY LẠI
+        toolbar.setNavigationOnClickListener(v -> {
+            // Phương thức này đóng Activity hiện tại và quay lại Activity trước đó
+            onBackPressed();
+        });
 
         // Ánh xạ view
         etUser = findViewById(R.id.etUser);
@@ -49,19 +67,23 @@ public class LoginActivity extends AppCompatActivity {
                             "Đăng nhập thành công! Xin chào " + user.getUsername(),
                             Toast.LENGTH_SHORT).show();
 
-                    // 🧩 Kiểm tra vai trò người dùng
+                    // 🎯 SỬA LỖI #1: LƯU USER ID VÀO SESSION (SharedPreferences)
+                    // Đây là bước CỰC KỲ QUAN TRỌNG để các Activity khác có thể lấy ID người dùng
+                    SessionManager.saveLoggedInUserId(LoginActivity.this, user.getUser_id());
+
+                    // 🎯 SỬA LỖI #2: CHUẨN BỊ INTENT (Truyền đối tượng User)
+                    Intent intent;
                     if (user.getRole() != null && user.getRole().equalsIgnoreCase("admin")) {
-                        // Nếu là admin → sang AdminActivity
-                        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                        intent.putExtra("username", user.getUsername());
-                        startActivity(intent);
+                        intent = new Intent(LoginActivity.this, AdminActivity.class);
                     } else {
-                        // Nếu là user → sang MainActivity
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("username", user.getUsername());
-                        startActivity(intent);
+                        intent = new Intent(LoginActivity.this, MainActivity.class);
                     }
 
+                    // Thay thế putExtra("username") bằng putExtra("user") để truyền đối tượng đầy đủ
+                    // Điều này giúp MainActivity có thể đọc user.getUser_id()
+                    intent.putExtra("user", user);
+
+                    startActivity(intent);
                     finish(); // đóng LoginActivity
                 } else {
                     Toast.makeText(LoginActivity.this,

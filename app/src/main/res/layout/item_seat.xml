@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="2dp">
+
+    <TextView
+        android:id="@+id/tv_seat_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="#EEEEEE"
+
+        android:gravity="center"
+        android:padding="8dp"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:minHeight="35dp"
+        android:minWidth="35dp"
+        tools:text="A1"/>
+
+</LinearLayout>

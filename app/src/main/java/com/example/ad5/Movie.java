@@ -2,7 +2,9 @@
 
 package com.example.ad5;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
 
     // Khai báo các trường dữ liệu ánh xạ TRỰC TIẾP từ tên cột DB
     private int movie_id;
@@ -69,4 +71,19 @@ public class Movie {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "movie_id=" + movie_id +
+                ", movie_name='" + movie_name + '\'' +
+                ", movie_type='" + movie_type + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                ", duration='" + duration + '\'' +
+                ", language='" + language + '\'' +
+                ", release_date='" + release_date + '\'' +
+                ", point=" + point +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }
