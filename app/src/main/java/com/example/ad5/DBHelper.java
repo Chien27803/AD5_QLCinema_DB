@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "cinema_db.db";
-    private static final int DB_VERSION = 7; // Tăng version để tạo lại DB với dữ liệu mới
+    private static final int DB_VERSION = 11; // Tăng version để tạo lại DB với dữ liệu mới
 
     public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -122,6 +122,18 @@ public class DBHelper extends SQLiteOpenHelper {
                 "point REAL DEFAULT 0, " +
                 "status TEXT DEFAULT 'Đang chiếu')");
 
+        db.execSQL("CREATE TABLE IF NOT EXISTS Booking_Details (" +
+                "detail_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "ticket_id INTEGER, " +
+                "movie_name TEXT, " +
+                "movie_image TEXT, " +
+                "show_date TEXT, " +
+                "show_time TEXT, " +
+                "seats TEXT, " +
+                "payment_method TEXT, " +
+                "FOREIGN KEY(ticket_id) REFERENCES Ticket(ticket_id))");
+
+
         // ===== Thêm 10 bộ phim hot gần đây =====
         db.execSQL("INSERT INTO Movie (movie_name, movie_type, description, image, duration,language, release_date, point, status) VALUES " +
                 "('Inside Out 2', 'Hoạt hình, Gia đình', 'Tiếp nối hành trình cảm xúc của cô bé Riley với nhiều cảm xúc mới.', 'https://res.cloudinary.com/dq4guha5o/image/upload/v1762340504/inside2_a5etr8.png', 90,'English', '2024-06-14', 8.8, 'Đang chiếu')," +
@@ -204,6 +216,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Seat");
         db.execSQL("DROP TABLE IF EXISTS Room");
         db.execSQL("DROP TABLE IF EXISTS Users");
+        db.execSQL("DROP TABLE IF EXISTS Booking_Details");
         onCreate(db);
     }
 

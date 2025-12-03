@@ -1,5 +1,6 @@
 package com.example.ad5;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -54,7 +55,8 @@ public class RegisterActivity extends AppCompatActivity {
             boolean isSuccess = db.addUser(username, email, phone, address, pass);
             if (isSuccess) {
                 Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                finish();
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, "Email đã tồn tại hoặc có lỗi xảy ra!", Toast.LENGTH_SHORT).show();
             }

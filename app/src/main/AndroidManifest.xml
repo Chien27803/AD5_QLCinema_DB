@@ -34,6 +34,9 @@
         <activity
             android:name=".MyTicketsActivity"
             android:exported="false" />
+        <activity
+            android:name=".TicketDetailActivity"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"

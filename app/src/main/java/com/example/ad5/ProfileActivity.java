@@ -192,10 +192,10 @@ public class ProfileActivity extends AppCompatActivity {
             } else if (id == R.id.nav_tickets) {
                 // Xem vé của tôi
                 if (currentUser != null && currentUser.getUser_id() > 0) {
-                    Toast.makeText(this, "Vé của tôi", Toast.LENGTH_SHORT).show();
                     // TODO: Intent intent = new Intent(this, MyTicketsActivity.class);
-                    // intent.putExtra("user", currentUser);
-                    // startActivity(intent);
+                    Intent intent = new Intent(ProfileActivity.this, MyTicketsActivity.class);
+                    intent.putExtra("user", currentUser);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(this, "Vui lòng đăng nhập để xem vé", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);

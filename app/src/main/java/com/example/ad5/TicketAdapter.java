@@ -1,6 +1,8 @@
 package com.example.ad5;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +57,13 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
             holder.tvStatus.setText("✗ Đã hủy");
             holder.tvStatus.setBackgroundTintList(context.getResources().getColorStateList(android.R.color.holo_red_dark));
         }
+
+        // Click to view detail
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, TicketDetailActivity.class);
+            intent.putExtra("ticket_id", ticket.getTicketId());
+            ((Activity) context).startActivityForResult(intent, 100);
+        });
     }
 
     @Override

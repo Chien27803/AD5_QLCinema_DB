@@ -350,16 +350,7 @@ public class BookingActivity extends AppCompatActivity {
                 return false;
             }
 
-            // 4. Lưu thông tin chi tiết để hiển thị sau (custom table)
-            ContentValues detailValues = new ContentValues();
-            detailValues.put("ticket_id", ticketId);
-            detailValues.put("movie_name", movie.getMovie_name());
-            detailValues.put("movie_image", movie.getImage());
-            detailValues.put("show_date", selectedDate);
-            detailValues.put("show_time", selectedShowtime);
-            detailValues.put("seats", String.join(", ", selectedSeats));
-            detailValues.put("payment_method", selectedPaymentMethodName);
-
+            // 4. Tạo bảng Booking_Details nếu chưa có
             db.execSQL("CREATE TABLE IF NOT EXISTS Booking_Details (" +
                     "detail_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "ticket_id INTEGER, " +
@@ -370,7 +361,21 @@ public class BookingActivity extends AppCompatActivity {
                     "seats TEXT, " +
                     "payment_method TEXT)");
 
-            db.insert("Booking_Details", null, detailValues);
+            // 5. Lưu thông tin chi tiết để hiển thị sau
+            ContentValues detailValues = new ContentValues();
+            detailValues.put("ticket_id", ticketId);
+            detailValues.put("movie_name", movie.getMovie_name());
+            detailValues.put("movie_image", movie.getImage());
+            detailValues.put("show_date", selectedDate);
+            detailValues.put("show_time", selectedShowtime);
+            detailValues.put("seats", String.join(", ", selectedSeats));
+            detailValues.put("payment_method", selectedPaymentMethodName);
+
+            long detailId = db.insert("Booking_Details", null, detailValues);
+
+            if (detailId == -1) {
+                return false;
+            }
 
             db.setTransactionSuccessful();
             return true;

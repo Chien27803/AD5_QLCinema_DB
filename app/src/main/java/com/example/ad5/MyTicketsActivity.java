@@ -1,5 +1,6 @@
 package com.example.ad5;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -40,6 +41,14 @@ public class MyTicketsActivity extends AppCompatActivity {
         setupClickListeners();
         loadTickets();
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+            // Refresh list after cancel ticket
+            loadTickets();
+        }
+    }
 
     private void initViews() {
         btnBack = findViewById(R.id.btnBack);
@@ -56,28 +65,47 @@ public class MyTicketsActivity extends AppCompatActivity {
         ticketList.clear();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
+        // Query với LEFT JOIN để lấy đầy đủ thông tin
         String query = "SELECT t.ticket_id, t.total_money, t.booking_time, t.status, " +
                 "bd.movie_name, bd.movie_image, bd.show_date, bd.show_time, bd.seats, bd.payment_method " +
                 "FROM Ticket t " +
                 "LEFT JOIN Booking_Details bd ON t.ticket_id = bd.ticket_id " +
                 "WHERE t.user_id = ? " +
-                "ORDER BY t.booking_time DESC";
+                "ORDER BY t.ticket_id DESC";
 
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(currentUser.getUser_id())});
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 TicketItem ticket = new TicketItem();
+
+                // Lấy dữ liệu từ cursor
                 ticket.setTicketId(cursor.getInt(0));
                 ticket.setTotalMoney(cursor.getInt(1));
                 ticket.setBookingTime(cursor.getString(2));
                 ticket.setStatus(cursor.getString(3));
-                ticket.setMovieName(cursor.getString(4));
-                ticket.setMovieImage(cursor.getString(5));
-                ticket.setShowDate(cursor.getString(6));
-                ticket.setShowTime(cursor.getString(7));
-                ticket.setSeats(cursor.getString(8));
-                ticket.setPaymentMethod(cursor.getString(9));
+
+                // Kiểm tra null trước khi set
+                String movieName = cursor.getString(4);
+                String movieImage = cursor.getString(5);
+                String showDate = cursor.getString(6);
+                String showTime = cursor.getString(7);
+                String seats = cursor.getString(8);
+                String paymentMethod = cursor.getString(9);
+
+                // Debug log
+                android.util.Log.d("MyTickets", "Ticket ID: " + ticket.getTicketId());
+                android.util.Log.d("MyTickets", "Movie: " + movieName);
+                android.util.Log.d("MyTickets", "Date: " + showDate);
+                android.util.Log.d("MyTickets", "Time: " + showTime);
+                android.util.Log.d("MyTickets", "Seats: " + seats);
+
+                ticket.setMovieName(movieName != null ? movieName : "Không có tên");
+                ticket.setMovieImage(movieImage != null ? movieImage : "");
+                ticket.setShowDate(showDate != null ? showDate : "N/A");
+                ticket.setShowTime(showTime != null ? showTime : "N/A");
+                ticket.setSeats(seats != null ? seats : "N/A");
+                ticket.setPaymentMethod(paymentMethod != null ? paymentMethod : "N/A");
 
                 ticketList.add(ticket);
             } while (cursor.moveToNext());
