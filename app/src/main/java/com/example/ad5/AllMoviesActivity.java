@@ -58,6 +58,10 @@ public class AllMoviesActivity extends AppCompatActivity {
         initViews();
         setupRecyclerView();
         setupClickListeners();
+
+        // NEW: Kiểm tra intent đến để thiết lập bộ lọc ban đầu
+        checkIncomingIntent();
+
         loadAllMovies();
     }
 
@@ -86,6 +90,34 @@ public class AllMoviesActivity extends AppCompatActivity {
         btnPrevPage = findViewById(R.id.btnPrevPage);
         btnNextPage = findViewById(R.id.btnNextPage);
         btnLastPage = findViewById(R.id.btnLastPage);
+    }
+
+    private void checkIncomingIntent() {
+        String filter = getIntent().getStringExtra("filter_status");
+        if (filter != null && !filter.isEmpty()) {
+            currentFilter = filter;
+
+            int chipIdToSelect = R.id.chipAll;
+
+            // Xác định Chip tương ứng
+            if (filter.equals("Đang chiếu")) {
+                chipIdToSelect = R.id.chipNowShowing;
+            } else if (filter.equals("Sắp chiếu")) {
+                chipIdToSelect = R.id.chipComingSoon;
+            } else if (filter.equals("Ngừng chiếu")) {
+                chipIdToSelect = R.id.chipStopped;
+            }
+
+            // Thiết lập trạng thái Checked cho Chip
+            Chip selectedChip = findViewById(chipIdToSelect);
+            if (selectedChip != null) {
+                // Xóa check cũ (Mặc định là chipAll được check trong layout)
+                chipGroup.clearCheck();
+                // Set chip mới. Việc này sẽ kích hoạt listener của ChipGroup
+                // và gọi applyFilterAndSearch() với currentFilter mới.
+                selectedChip.setChecked(true);
+            }
+        }
     }
 
     private void setupRecyclerView() {

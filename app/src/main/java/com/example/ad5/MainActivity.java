@@ -106,21 +106,22 @@ public class MainActivity extends AppCompatActivity {
 
         // Promotions
         cardPromotion.setOnClickListener(v -> {
-            Toast.makeText(this, "Khuyến mãi đang cập nhật", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, PromotionActivity.class);
+            startActivity(intent);
         });
 
         // News
         cardNews.setOnClickListener(v -> {
-            Toast.makeText(this, "Tin tức điện ảnh", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, NewsListActivity.class);
+            startActivity(intent);
         });
 
         // My tickets
         cardMyTickets.setOnClickListener(v -> {
             if (currentUser.getUser_id() > 0) {
-                // TODO: Intent intent = new Intent(this, MyTicketsActivity.class);
-                // intent.putExtra("user", currentUser);
-                // startActivity(intent);
-                Toast.makeText(this, "Vé của bạn", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, MyTicketsActivity.class);
+                intent.putExtra("user", currentUser);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
             }
@@ -128,16 +129,25 @@ public class MainActivity extends AppCompatActivity {
 
         // See all buttons
         tvSeeAllNowShowing.setOnClickListener(v -> {
-            Toast.makeText(this, "Xem tất cả phim đang chiếu", Toast.LENGTH_SHORT).show();
+            // Chuyển sang AllMoviesActivity và truyền trạng thái "Đang chiếu"
+            Intent intent = new Intent(MainActivity.this, AllMoviesActivity.class);
+            intent.putExtra("user", currentUser);
+            intent.putExtra("filter_status", "Đang chiếu");
+            startActivity(intent);
         });
 
         tvSeeAllComingSoon.setOnClickListener(v -> {
-            Toast.makeText(this, "Xem tất cả phim sắp chiếu", Toast.LENGTH_SHORT).show();
+            // Chuyển sang AllMoviesActivity và truyền trạng thái "Sắp chiếu"
+            Intent intent = new Intent(MainActivity.this, AllMoviesActivity.class);
+            intent.putExtra("user", currentUser);
+            intent.putExtra("filter_status", "Sắp chiếu");
+            startActivity(intent);
         });
 
         // Banner
         imgBanner.setOnClickListener(v -> {
-            Toast.makeText(this, "Xem chi tiết khuyến mãi", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, PromotionActivity.class);
+            startActivity(intent);
         });
     }
 

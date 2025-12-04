@@ -37,6 +37,15 @@
         <activity
             android:name=".TicketDetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".NewsListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NewsDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PromotionActivity"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"

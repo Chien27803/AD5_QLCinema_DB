@@ -26,6 +26,9 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.DateViewHolder
         this.context = context;
         this.dateList = dateList;
         this.listener = listener;
+        if (!dateList.isEmpty()) {
+            selectedPosition = 0; // Select the first item by default
+        }
     }
 
     @NonNull
@@ -70,6 +73,17 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.DateViewHolder
     @Override
     public int getItemCount() {
         return dateList.size();
+    }
+
+    // New method to select first item and trigger callback
+    public void selectFirstItem() {
+        if (!dateList.isEmpty() && listener != null) {
+            if (selectedPosition == -1) {
+                selectedPosition = 0;
+            }
+            listener.onDateClick(dateList.get(selectedPosition), selectedPosition);
+            notifyItemChanged(selectedPosition);
+        }
     }
 
     static class DateViewHolder extends RecyclerView.ViewHolder {
